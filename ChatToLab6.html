@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat for me</title>
+    <link rel="icon" href="charla.png">
+</head>
+<body>
+
+<script type="text/javascript">
+    const buttonTOsend = document.createElement('button')
+    minichat = document.createElement('div')
+    minichat.style.borderRadius='20px'
+    minichat.style.width ='700px'
+    minichat.style.height='1000px'
+    minichat.style.margin='auto'
+    minichat.style.backgroundColor='rgba(91, 91, 91, 0.90)'
+    document.body.style.padding='0px'
+    document.body.style.margin='0px'
+    document.body.style.backgroundColor = '#fbfbff'
+    body = document.body
+    body.style.opacity='1'
+    body.style.backgroundImage='linear-gradient(#e2e2e2 8px, transparent 8px), linear-gradient(90deg, #e2e2e2 8px, transparent 8px), linear-gradient(#e2e2e2 4px, transparent 4px), linear-gradient(90deg, #e2e2e2 4px, #fbfbff 4px)'
+    body.style.backgroundSize='200px 200px, 200px 200px, 40px 40px, 40px 40px'
+    body.style.backgroundPosition='-8px -8px, -8px -8px, -4px -4px, -4px -4px'
+    body.style.color='E2E2E2'
+
+    function chatMessages(text,user,hour) {
+        chatBoxes=document.createElement('li')
+        chatBox=document.createElement('p')
+        chatBoxes.append(chatBox)
+        texto=document.createElement('span')
+        texto.append(text)
+        chatBox.append(texto)
+        chatBox.style.padding='20px'
+        texto.style.padding='20px'
+        texto.style.borderBottomRightRadius='15px'
+        texto.style.borderBottomLeftRadius='15px'
+        texto.style.borderTopRightRadius='15px'
+        texto.style.color='white'
+        texto.style.fontFamily='Arial';
+        texto.style.backgroundColor='#333333'
+        return chatBoxes
+    }
+    minibarraNEGRA =document.createElement('p')
+    minibarraNEGRA.style.height='60px'
+    minibarraNEGRA.style.borderTopLeftRadius='20px'
+    minibarraNEGRA.style.borderTopRightRadius='20px'
+    minibarraNEGRA.style.backgroundColor='rgb(49, 49, 49)'
+    minichat.append(minibarraNEGRA)
+    const listaMensajes=document.createElement('ul')
+    listaMensajes.style.height='810px'
+    listaMensajes.style.overflowY ='scroll'
+    listaMensajes.style.listStyle='none'
+    a=chatMessages('Soy Daniel Armando Valdez Reyes',2,3)
+    c=chatMessages('Soy Diego que tal',2,3)
+    e=chatMessages('Soy Daniel Armando Valdez Reyes',2,3)
+    d=chatMessages('Soy Daniel Armando Valdez Reyes',2,3)
+    listaMensajes.append(a)
+    listaMensajes.append(c)
+    listaMensajes.append(e)
+    listaMensajes.append(d)
+
+
+    const parteAbajo = document.createElement('footer')
+    parteAbajo.style.height='100px'
+    parteAbajo.style.borderBottomRightRadius='20px'
+    parteAbajo.style.borderBottomLeftRadius='20px'
+    parteAbajo.style.backgroundColor='rgb(49, 49, 49)'
+
+
+
+
+    const getMessages = async ()=>{
+        console.log('before fetch')
+        const response = await fetch('http://uvgenios.online/api/messages')
+        const messages = await response.json()
+        const lis = messages.map((message) => chatMessages(message.text, message.user,22))
+        lis.forEach((li) => listaMensajes.append(li))
+    }
+    getMessages()
+
+    document.body.append(minichat)
+    minichat.append(listaMensajes)
+    minichat.append(parteAbajo)
+</script>
+
+</body>
+</html>
